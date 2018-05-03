@@ -29,7 +29,7 @@ function init() {
     particles = [];
 
     for(var i =0; i < 70; i++) {
-    	particles.push(new Particle);
+    	particles.push(new Particle());
     }
     animate();
 }
@@ -46,9 +46,8 @@ function animate() {
 
     if(mouseEffect) {
         for(var i=1; i < particles.length; i++) {
-            if(util.distance(mouse.x,mouse.y,particles[i].position.x,particles[i].position.y)<250) {
-                this.string = 100/(util.distance(mouse.x,mouse.y,particles[i].position.x,particles[i].position.y));
-                //this.string = 0.3;
+            if(util.distance(mouse.x,mouse.y,particles[i].position.x,particles[i].position.y)<150) {
+                this.string = 50/(util.distance(mouse.x,mouse.y,particles[i].position.x,particles[i].position.y));
                 c.beginPath();
                 c.moveTo(mouse.x,mouse.y);
                 c.lineTo(particles[i].position.x,particles[i].position.y);

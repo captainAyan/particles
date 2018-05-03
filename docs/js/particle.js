@@ -8,6 +8,8 @@ var Particle = function() {
 		y: util.randomIntFromRange(-100,100)/100
 	}
 
+	this.connect = (Math.random() > 0.5)? true : false;
+
 	this.radius = util.randomIntFromRange(100,300)/100;
 	this.growth = 0.05;
 	if(this.radius > 2 || this.radius < 1) {
@@ -23,8 +25,8 @@ var Particle = function() {
 	}
 
 	this.update = function() {
-		this.position.x += this.velocity.x/5;
-		this.position.y += this.velocity.y/5;
+		this.position.x += this.velocity.x*2;
+		this.position.y += this.velocity.y*2;
 
 		this.radius += this.growth;
 		if(this.radius > 3 || this.radius < 1) {
@@ -49,19 +51,19 @@ var Particle = function() {
 
 		// connections
 		if(connect) {
-            for(var i=1; i < particles.length; i++) {
-                if(this != particles[i] && (util.distance(this.position.x,this.position.y,particles[i].position.x,particles[i].position.y)<150) ) {
-                	this.string = 7.5/(util.distance(this.position.x,this.position.y,particles[i].position.x,particles[i].position.y));
-                	//this.string = 0.3;
+            //for(var i=1; i < particles.length; i++) {
+            particles.forEach((particle)=> {
+                if(this != particle && (util.distance(this.position.x,this.position.y,particle.position.x,particle.position.y)<150)) {
+                	this.string = 10/(util.distance(this.position.x,this.position.y,particle.position.x,particle.position.y));
                     c.beginPath();
                     c.moveTo(this.position.x,this.position.y);
-                    c.lineTo(particles[i].position.x,particles[i].position.y);
+                    c.lineTo(particle.position.x,particle.position.y);
                     c.lineWidth = 1;
                     c.strokeStyle = "rgba(200,200,200," + this.string + ")";
                     c.stroke();
                     c.closePath();
                 }
-            }
+            });
         }
 
 		this.draw();
