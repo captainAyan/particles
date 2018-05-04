@@ -10,7 +10,8 @@ var total_frames = 0;
 
 var particles;
 var connect = true;
-var mouseEffect = false;
+var mouseEffect = true;
+var connectionDistance = 150;
 
 var mouse = {
     x: undefined,
@@ -28,7 +29,7 @@ document.querySelector('canvas').addEventListener("mousemove",(e)=> {
 function init() {
     particles = [];
 
-    for(var i =0; i < 70; i++) {
+    for(var i =0; i < 80; i++) {
     	particles.push(new Particle());
     }
     animate();
@@ -45,18 +46,18 @@ function animate() {
     });
 
     if(mouseEffect) {
-        for(var i=1; i < particles.length; i++) {
-            if(util.distance(mouse.x,mouse.y,particles[i].position.x,particles[i].position.y)<150) {
-                this.string = 50/(util.distance(mouse.x,mouse.y,particles[i].position.x,particles[i].position.y));
+        particles.forEach((particle)=> {
+            if(util.distance(mouse.x,mouse.y,particle.position.x,particle.position.y)<connectionDistance) {
+                this.stringOpacity = (1 - (((util.distance(mouse.x,mouse.y,particle.position.x,particle.position.y))*(1/150)))/1).toFixed(3);
                 c.beginPath();
                 c.moveTo(mouse.x,mouse.y);
-                c.lineTo(particles[i].position.x,particles[i].position.y);
+                c.lineTo(particle.position.x,particle.position.y);
                 c.lineWidth = 0.5;
-                c.strokeStyle = "rgba(200,200,200," + this.string + ")";
+                c.strokeStyle = "rgba(200,200,200," + this.stringOpacity + ")";
                 c.stroke();
                 c.closePath();
             }
-        }
+        });
     }
 }
 

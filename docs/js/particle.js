@@ -20,6 +20,23 @@ var Particle = function() {
 		c.fillStyle = "rgba(255,255,255,0.6)";
 		c.fill();
 		c.closePath();
+
+		// Connections
+		if(connect) {
+            particles.forEach( (particle) => {
+                if(this != particle && (util.distance(this.position.x,this.position.y,particle.position.x,particle.position.y)<connectionDistance)) {
+                	// the value of stringOpacity is divided by 2 because every paricle connects to each other with two string with doubles the opacity
+                	this.stringOpacity = ((1 - ((util.distance(this.position.x,this.position.y,particle.position.x,particle.position.y))*(1/150)))/2).toFixed(3);
+                    c.beginPath();
+                    c.moveTo(this.position.x,this.position.y);
+                    c.lineTo(particle.position.x,particle.position.y);
+                    c.lineWidth = 1;
+                    c.strokeStyle = "rgba(255,255,255," + this.stringOpacity + ")";
+                    c.stroke();
+                    c.closePath();
+                }
+            });
+        }
 	}
 
 	this.update = function() {
@@ -46,22 +63,6 @@ var Particle = function() {
 		else if(this.position.y < 0) {
 			this.position.y = height;
 		}
-
-		// connections
-		if(connect) {
-            particles.forEach( (particle) => {
-                if(this != particle && (util.distance(this.position.x,this.position.y,particle.position.x,particle.position.y)<150)) {
-                	this.string = 10/(util.distance(this.position.x,this.position.y,particle.position.x,particle.position.y));
-                    c.beginPath();
-                    c.moveTo(this.position.x,this.position.y);
-                    c.lineTo(particle.position.x,particle.position.y);
-                    c.lineWidth = 1;
-                    c.strokeStyle = "rgba(200,200,200," + this.string + ")";
-                    c.stroke();
-                    c.closePath();
-                }
-            });
-        }
 
 		this.draw();
 	}
