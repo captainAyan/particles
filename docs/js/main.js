@@ -10,7 +10,7 @@ var total_frames = 0;
 
 var particles;
 var connect = true;
-var mouseEffect = true;
+var mouseEffect = false;
 
 var mouse = {
     x: undefined,

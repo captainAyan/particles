@@ -3,12 +3,32 @@
 	padding:0;
 }
 
-/*body {
+/*
+body {
 	background: #ff5f6d;
 	background: -webkit-linear-gradient(to right, #ff5f6d, #ffc371);
 	background: linear-gradient(to right, #ff5f6d, #ffc371);
-}*/
+}
 
 body {
-	background-image: linear-gradient(to right top, #051937, #004d7a, #008793, #00bf72, #a8eb12);
+	background: linear-gradient(to right top, #051937, #004d7a, #008793, #00bf72, #a8eb12);
+}
+
+body {
+	background: #4776e6;
+	background: -webkit-linear-gradient(to right, #4776e6, #8e54e9);
+	background: linear-gradient(to right, #4776e6, #8e54e9);
+}
+
+body {
+	background: #DA22FF;
+    background: -webkit-linear-gradient(to right, #9733EE, #DA22FF);
+    background: linear-gradient(to right, #9733EE, #DA22FF);
+}
+*/
+
+body {
+	background: #1488cc;
+	background: -webkit-linear-gradient(to right, #1488cc, #2b32b2);
+    background: linear-gradient(to right, #1488cc, #2b32b2);
 }
