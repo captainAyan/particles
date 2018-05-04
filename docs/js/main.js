@@ -12,6 +12,7 @@ var particles;
 var connect = true;
 var mouseEffect = true;
 var connectionDistance = 150;
+var connectionDistanceMouse = 300;
 
 var mouse = {
     x: undefined,
@@ -47,13 +48,13 @@ function animate() {
 
     if(mouseEffect) {
         particles.forEach((particle)=> {
-            if(util.distance(mouse.x,mouse.y,particle.position.x,particle.position.y)<connectionDistance) {
-                this.stringOpacity = (1 - (((util.distance(mouse.x,mouse.y,particle.position.x,particle.position.y))*(1/150)))/1).toFixed(3);
+            if(util.distance(mouse.x,mouse.y,particle.position.x,particle.position.y)<connectionDistanceMouse) {
+                this.stringOpacity = (1 - (((util.distance(mouse.x,mouse.y,particle.position.x,particle.position.y))*(1/connectionDistanceMouse)))/1).toFixed(3);
                 c.beginPath();
                 c.moveTo(mouse.x,mouse.y);
                 c.lineTo(particle.position.x,particle.position.y);
                 c.lineWidth = 0.5;
-                c.strokeStyle = "rgba(200,200,200," + this.stringOpacity + ")";
+                c.strokeStyle = "rgba(255,255,255," + this.stringOpacity + ")";
                 c.stroke();
                 c.closePath();
             }

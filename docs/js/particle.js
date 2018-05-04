@@ -8,8 +8,8 @@ var Particle = function() {
 		y: util.randomIntFromRange(-100,100)/100
 	}
 
-	this.radius = util.randomIntFromRange(100,300)/100;
-	this.growth = 0.05;
+	this.radius = util.randomIntFromRange(100,400)/100;
+	this.growth = 0.1;
 	if(this.radius > 2 || this.radius < 1) {
 		this.growth = -(this.growth);
 	}
@@ -17,7 +17,7 @@ var Particle = function() {
 	this.draw = function() {
 		c.beginPath();
 		c.arc(this.position.x,this.position.y,this.radius,0,Math.PI*2,false);
-		c.fillStyle = "rgba(255,255,255,0.6)";
+		c.fillStyle = "rgba(255,255,255,0.5)";
 		c.fill();
 		c.closePath();
 
@@ -31,7 +31,7 @@ var Particle = function() {
                     c.moveTo(this.position.x,this.position.y);
                     c.lineTo(particle.position.x,particle.position.y);
                     c.lineWidth = 1;
-                    c.strokeStyle = "rgba(255,255,255," + this.stringOpacity + ")";
+                    c.strokeStyle = "rgba(200,200,200," + this.stringOpacity + ")";
                     c.stroke();
                     c.closePath();
                 }
@@ -40,8 +40,8 @@ var Particle = function() {
 	}
 
 	this.update = function() {
-		this.position.x += this.velocity.x*0.5;
-		this.position.y += this.velocity.y*0.5;
+		this.position.x += this.velocity.x;
+		this.position.y += this.velocity.y;
 
 		this.radius += this.growth;
 		if(this.radius > 3 || this.radius < 1) {
