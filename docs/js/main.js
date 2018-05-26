@@ -8,11 +8,11 @@ const c = setup.context;
 var particles;
 
 // config
-var particles_count = 70;
-var connect = true;
-var mouseEffect = true;
-var connectionDistance = 150;
-var connectionDistanceMouse = 200;
+var particles_count = 70; // total number of particles
+var connect = true; // true if you want to connect particles with each other
+var mouseEffect = true; // true if you want to connect particles with the mouse
+var connectionDistance = 150; // highest distance each particle's connction radius
+var connectionDistanceMouse = 200; // highest distance mouse to particle connection radius
 
 var mouse = {
     x: undefined,

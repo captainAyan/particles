@@ -38,6 +38,18 @@
 	<script src="js/particle.js"></script>
 	<script src="js/main.js"></script>
 	<script type="text/javascript">
+
+
+		// the carousel_time is time gap between two consecutive quote display time
+		var carousel_time = 5; // in seconds
+
+		// This array contains all your quotes. You can add as many as you want.
+		var quotes = [
+			"Lorem ipsum dolor sit amet, dico quaeque nec in, <span class='footer'>- Lorem Ipsum</span>",
+			"Cu possim graecis eos, sit alii principes ea, ut vis nulla deserunt.  <span class='footer'>- Lorem Ipsum</span>",
+			"Elitr aeterno delectus ut vix. <span class='footer'>- Lorem Ipsum</span>"
+		];
+
 		function v_center(container,item) {
 			if(container.clientHeight == undefined) {
 				container.clientHeight = container.innerHeight;
@@ -49,12 +61,6 @@
 		}
 
 		var index = -1;
-		var carousel_time = 5; // in seconds
-		var quotes = [
-			"Lets come togather and make the world a better place. <span class='footer'>- Lorem Ipsum</span>", 
-			"Why think small, this is my lets make it large with Lurel's Cap. Social network line never before. <span class='footer'>- Lorem Ipsum</span>",
-			"Find a new world with power of connectivity and ideas of innovation. <span class='footer'>- Lorem Ipsum</span>"
-		];
 
 		function display_quote() {
 			index += 1;
@@ -84,6 +90,19 @@
 			$('.loader').show();
 			$('.loginmodal-submit').attr('disabled','disabled');
 			document.querySelector('#login-form').style.filter='blur(5px)';
+
+			/*
+			// make an AJAX request to the server.
+			$.ajax({
+			  type: "POST",
+			  url: login.php,
+			  data: data_set,
+			  success: function(e) {
+					// check response and redirect the page
+				}
+			});
+			*/
+
 		});
 	</script>
 </body>
