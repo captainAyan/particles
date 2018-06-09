@@ -3,12 +3,90 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Particles</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="css/style.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-	<canvas></canvas>
+	<canvas id="canvas"></canvas>
+	<div class="over-canvas container">
+		<div class="row" >
+			<div class="col-md-8 hidden-xs hidden-sm captain-container">
+				<p class="caption-text" id="caption-text"></p>
+			</div>
+			<div class="col-md-4 col-sm-12">
+				<div class="loginmodal-container">
+					<h1>Login</h1><br>
+					<form id="login-form" method="POST">
+						<input type="text" name="user" class="loginmodal-username" autocomplete="false" id="" placeholder="Username">
+						<input type="password" name="pass" class="loginmodal-password" autocomplete="false" placeholder="Password">
+						<input type="submit" name="login" class="loginmodal-submit" value="Login">
+					</form>
+					<div class="login-help">
+						<a href="#">Register</a> - <a href="#">Forgot Password</a>
+					</div>
+					<div class="loader"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Particles scripts -->
 	<script src="js/utility.js"></script>
 	<script src="js/particle.js"></script>
 	<script src="js/main.js"></script>
+	<script type="text/javascript">
+		function v_center(container,item) {
+			if(container.clientHeight == undefined) {
+				container.clientHeight = container.innerHeight;
+				item.style.marginTop = ((container.clientHeight - item.clientHeight)/2)+"px";
+			}
+			else {
+				item.style.marginTop = ((container.clientHeight - item.clientHeight)/2)+"px";
+			}
+		}
+
+		var index = -1;
+		var carousel_time = 5; // in seconds
+		var quotes = [
+			"Lets come togather and make the world a better place. <span class='footer'>- Lorem Ipsum</span>", 
+			"Why think small, this is my lets make it large with Lurel's Cap. Social network line never before. <span class='footer'>- Lorem Ipsum</span>",
+			"Find a new world with power of connectivity and ideas of innovation. <span class='footer'>- Lorem Ipsum</span>"
+		];
+
+		function display_quote() {
+			index += 1;
+			index = index % quotes.length;
+			document.getElementById('caption-text').style.opacity = 0;
+			setTimeout(()=>{
+				document.getElementById('caption-text').innerHTML = quotes[index];
+				v_center(document.querySelector('.row'), document.querySelector('#caption-text'));
+				document.getElementById('caption-text').style.opacity = 1;
+			},500);
+			setTimeout(display_quote,5000);
+		}
+		display_quote();
+		v_center(window, document.querySelector('.row'));
+	</script>
+
+	<!-- Form handler -->
+	<script type="text/javascript">
+		$("#login-form").on('submit',(e)=>{
+			e.preventDefault();
+			console.log('submit');
+			var data_set = {
+				username: e.target[0].value,
+				password: e.target[1].value,
+				submit: true
+			};
+			$('.loader').show();
+			$('.loginmodal-username').attr('disabled', true);
+			$('.loginmodal-password').attr('disabled', true);
+			$('.loginmodal-submit').attr('disabled', true);
+			document.querySelector('#login-form').style.filter='blur(5px)';
+		});
+	</script>
 </body>
 </html>

@@ -5,21 +5,21 @@ const width = setup.width;
 const height = setup.height;
 const canvas = setup.canvas;
 const c = setup.context;
-
-var total_frames = 0;
-
 var particles;
+
+// config
+var particles_count = 70;
 var connect = true;
 var mouseEffect = true;
 var connectionDistance = 150;
-var connectionDistanceMouse = 300;
+var connectionDistanceMouse = 200;
 
 var mouse = {
     x: undefined,
     y: undefined
 };
 
-document.querySelector('canvas').addEventListener("mousemove",(e)=> {
+document.addEventListener("mousemove",(e)=> {
     mouse = {
         x: e.clientX,
         y: e.clientY
@@ -30,7 +30,7 @@ document.querySelector('canvas').addEventListener("mousemove",(e)=> {
 function init() {
     particles = [];
 
-    for(var i =0; i < 80; i++) {
+    for(var i =0; i < particles_count; i++) {
     	particles.push(new Particle());
     }
     animate();
@@ -40,7 +40,6 @@ function init() {
 function animate() {
     requestAnimationFrame(animate);
     c.clearRect(0, 0, width, height);
-    total_frames += 1;
 
     particles.forEach((particle)=> {
     	particle.update();

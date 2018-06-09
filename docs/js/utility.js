@@ -16,8 +16,8 @@ var Utility = function () {
 			this.canvas = document.querySelector('canvas');
 			this.context = this.canvas.getContext('2d');
 			this.screen = {
-				width : window.innerWidth-5,
-				height : window.innerHeight-5
+				width : window.innerWidth,
+				height : window.innerHeight
 			};
 
 			document.querySelector('body').style.margin = "0px";

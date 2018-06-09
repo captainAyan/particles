@@ -8,10 +8,11 @@ var Particle = function() {
 		y: util.randomIntFromRange(-100,100)/100
 	}
 
-	this.radius = util.randomIntFromRange(100,400)/100;
+	this.radius = (util.randomIntFromRange(100,300)/100);
 	this.growth = 0.1;
-	if(this.radius > 2 || this.radius < 1) {
+	if(this.radius >= 4 || this.radius <= 1) {
 		this.growth = -(this.growth);
+		this.radius - this.growth*2;
 	}
 
 	this.draw = function() {
@@ -20,13 +21,14 @@ var Particle = function() {
 		c.fillStyle = "rgba(255,255,255,0.5)";
 		c.fill();
 		c.closePath();
+		//c.fillText(this.radius,this.position.x+10,this.position.y+10);
 
 		// Connections
 		if(connect) {
-            particles.forEach( (particle) => {
+            particles.forEach((particle) => {
                 if(this != particle && (util.distance(this.position.x,this.position.y,particle.position.x,particle.position.y)<connectionDistance)) {
                 	// the value of stringOpacity is divided by 2 because every paricle connects to each other with two string with doubles the opacity
-                	this.stringOpacity = ((1 - ((util.distance(this.position.x,this.position.y,particle.position.x,particle.position.y))*(1/150)))/2).toFixed(3);
+                	this.stringOpacity = ((1 - ((util.distance(this.position.x,this.position.y,particle.position.x,particle.position.y))*(1/connectionDistance)))/2).toFixed(3);
                     c.beginPath();
                     c.moveTo(this.position.x,this.position.y);
                     c.lineTo(particle.position.x,particle.position.y);
@@ -49,19 +51,13 @@ var Particle = function() {
 		}
 
 		// x edge interaction
-		if(this.position.x > width) {
-			this.position.x = 0;
-		}
-		else if(this.position.x < 0) {
-			this.position.x = width;
+		if(this.position.x > width || this.position.x < 0) {
+			this.velocity.x *= -1;
 		}
 
 		// y edge interaction
-		if(this.position.y > height) {
-			this.position.y = 0;
-		}
-		else if(this.position.y < 0) {
-			this.position.y = height;
+		if(this.position.y > height || this.position.y < 0) {
+			this.velocity.y *= -1;
 		}
 
 		this.draw();
